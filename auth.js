@@ -4,7 +4,14 @@ import { app } from "./firebase.js";
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+import { db } from "./firebase.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// Dentro de tu función de registro...
+await setDoc(doc(db, "usuarios", user.uid), {
+    email: user.email,
+    fecha: new Date().toISOString()
+});
 window.registrar = async () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
