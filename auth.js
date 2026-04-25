@@ -1,44 +1,47 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { app } from "./firebase.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+// Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDLOxDUbUTa5kAX_ZvwH7NmggOO-kxkM2M",
+    authDomain: "ventas-pc-9d265.firebaseapp.com",
+    projectId: "ventas-pc-9d265",
+    storageBucket: "ventas-pc-9d265.firebasestorage.app",
+    messagingSenderId: "141433685680",
+    appId: "1:141433685680:web:992795effa34c833531d75"
+  };
+
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
+// REGISTRO
 window.registrar = async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    try {
-        // 1. Crea el usuario en Authentication
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        // 2. Guarda los datos en la base de datos Firestore
-        // Usamos el UID del usuario como ID del documento para que estén vinculados
-        await setDoc(doc(db, "usuarios", user.uid), {
-            email: user.email,
-            fechaRegistro: new Date().toISOString(),
-            rol: "cliente" // Puedes añadir campos extra aquí
-        });
-
-        alert("¡Cuenta creada y guardada en la base de datos!");
-        window.location.href = "index.html"; // Redirigir después del éxito
-
-    } catch (error) {
-        console.error("Error completo:", error);
-        alert("Error al registrar: " + error.message);
-    }
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    alert("Usuario registrado correctamente");
+    window.location.href = "login.html";
+  } catch (error) {
+    alert("Error: " + error.message);
+  }
 };
-// Función para Iniciar Sesión
-window.login = async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
 
-    try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        alert("¡Bienvenido!");
-        window.location.href = "tienda.html"; // Asegúrate de que este archivo exista
-    } catch (error) {
-        alert("Error al entrar: " + error.message);
-    }
+// LOGIN
+window.login = async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login exitoso");
+    window.location.href = "ventas.html"; // redirige al CRUD
+  } catch (error) {
+    alert("Error: " + error.message);
+  }
 };
