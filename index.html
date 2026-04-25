@@ -2,20 +2,34 @@
 <html>
 <head>
   <title>Lumina - Login</title>
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="fondo">
 
-<h1>💡 Lumina Store</h1>
-<h2>Iniciar Sesión</h2>
+<body class="login-body">
 
-<div class="card">
-  <input type="email" id="email" placeholder="Correo">
-  <input type="password" id="password" placeholder="Contraseña">
-  <button onclick="login()">Entrar</button>
+<div class="login-container">
+
+  <div class="login-card">
+    <h1>💡 LUMINA</h1>
+    <p class="subtitle">Ilumina tu experiencia</p>
+
+    <h2>Iniciar Sesión</h2>
+
+    <input type="email" id="email" placeholder="Correo electrónico">
+    <input type="password" id="password" placeholder="Contraseña">
+
+    <button onclick="login()">Entrar</button>
+
+    <p class="registro-link">
+      ¿No tienes cuenta? <a href="registro.html">Crear cuenta</a>
+    </p>
+  </div>
+
 </div>
-
-<p>¿No tienes cuenta? <a href="registro.html">Registrarse</a></p>
 
 <script type="module" src="auth.js"></script>
 </body>
