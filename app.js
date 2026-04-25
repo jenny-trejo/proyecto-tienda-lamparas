@@ -1,5 +1,5 @@
 // Import Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -8,17 +8,10 @@ import {
   deleteDoc,
   doc,
   updateDoc
-} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js";
 
 // Configuración Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDq96DmifjGKblR_p2fEmFDlch8Boq9Ta4",
-  authDomain: "proyecto-tienda-lamparas.firebaseapp.com",
-  projectId: "proyecto-tienda-lamparas",
-  storageBucket: "proyecto-tienda-lamparas.firebasestorage.app",
-  messagingSenderId: "272544835885",
-  appId: "1:272544835885:web:2d87c382dbf8f665800ba4"
-};
+
 // Inicializar
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
