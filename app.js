@@ -16,6 +16,7 @@ form.addEventListener("submit", async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "tienda.html";
     mensaje.textContent = "✅ Bienvenido";
   } catch (error) {
     mensaje.textContent = "❌ " + error.message;
@@ -25,7 +26,7 @@ form.addEventListener("submit", async (e) => {
 registerBtn.addEventListener("click", async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-window.location.href = "tienda.html";
+
 
 
   try {
