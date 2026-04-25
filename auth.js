@@ -1,7 +1,6 @@
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { app } from "./firebase.js";
-
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -28,5 +27,18 @@ window.registrar = async () => {
     } catch (error) {
         console.error("Error completo:", error);
         alert("Error al registrar: " + error.message);
+    }
+};
+// Función para Iniciar Sesión
+window.login = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        alert("¡Bienvenido!");
+        window.location.href = "tienda.html"; // Asegúrate de que este archivo exista
+    } catch (error) {
+        alert("Error al entrar: " + error.message);
     }
 };
