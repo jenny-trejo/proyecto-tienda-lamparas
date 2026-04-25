@@ -1,5 +1,5 @@
 // Import Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -8,13 +8,9 @@ import {
   deleteDoc,
   doc,
   updateDoc
-} from "https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Configuración Firebase
-
-// Inicializar
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 // CREATE
 window.crearVenta = async () => {
