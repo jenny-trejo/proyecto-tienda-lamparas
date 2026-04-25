@@ -11,25 +11,27 @@ const registerBtn = document.getElementById("register");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const email = email.value;
-  const password = password.value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    mensaje.textContent = "Bienvenido";
+    mensaje.textContent = "✅ Bienvenido";
   } catch (error) {
-    mensaje.textContent = error.message;
+    mensaje.textContent = "❌ " + error.message;
   }
 });
 
 registerBtn.addEventListener("click", async () => {
-  const email = email.value;
-  const password = password.value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+window.location.href = "tienda.html";
+
 
   try {
     await createUserWithEmailAndPassword(auth, email, password);
-    mensaje.textContent = "Cuenta creada";
+    mensaje.textContent = "✅ Cuenta creada";
   } catch (error) {
-    mensaje.textContent = error.message;
+    mensaje.textContent = "❌ " + error.message;
   }
 });
