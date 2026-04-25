@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lumina - Tienda</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="header">
+  <h1>💡 LUMINA</h1>
+  <div class="carrito-icono">
+    🛒 <span id="contadorCarrito">0</span>
+  </div>
+</header>
+
+<section class="hero">
+  <h2>Catálogo de Lámparas</h2>
+  <p>Elige tu estilo ideal</p>
+</section>
+
+<div class="contenedor">
+
+  <!-- PRODUCTOS -->
+  <div id="catalogo" class="catalogo"></div>
+
+  <!-- CARRITO -->
+  <div class="carrito">
+    <h3>🛒 Carrito</h3>
+    <ul id="listaCarrito"></ul>
+    <h4>Total: $<span id="total">0</span></h4>
+  </div>
+
+</div>
+
+<script src="tienda.js"></script>
+
+</body>
+</html>
