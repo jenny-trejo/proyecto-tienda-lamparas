@@ -23,7 +23,7 @@ input {
   margin: 10px 0;
   border-radius: 8px;
   border: none;
-}
+} 
 
 button {
   width: 100%;
@@ -39,4 +39,51 @@ button {
   margin: 10px;
   padding: 15px;
   border-radius: 10px;
+}
+/* Centrar todo en la pantalla */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  background-color: #2c3e50; /* Tu color de fondo */
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.main-container {
+  text-align: center; /* Alinea los textos (h2 y p) al centro */
+  width: 100%;
+  max-width: 400px; /* Evita que el formulario sea demasiado ancho */
+}
+
+.form {
+  display: flex;
+  flex-direction: column; /* Pone los inputs uno abajo del otro */
+  gap: 15px;              /* Espacio entre cada elemento */
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #00bfff; /* Color azul del botón */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+a {
+  color: #a29bfe;
+  text-decoration: none;
 }
