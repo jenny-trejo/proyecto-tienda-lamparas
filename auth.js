@@ -44,3 +44,6 @@ window.login = async () => {
     alert("Error: " + error.message);
   }
 };
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
