@@ -3,33 +3,32 @@
 // firebase.initializeApp(firebaseConfig);
 // const db = firebase.firestore();
 // const storage = firebase.storage();
-async function guardarProducto() {
-  const nombre = document.getElementById('nombre').value;
-  const precio = document.getElementById('precio').value;
-  const urlImagen = document.getElementById('foto').value; // Ahora es texto
+  async function guardarProducto() {
+    // Verifica que estos IDs coincidan con tu HTML
+    const nombre = document.getElementById('p-name').value;
+    const precio = document.getElementById('p-price').value;
+    const urlImagen = document.getElementById('p-image').value;
 
-  if (!nombre || !precio || !urlImagen) {
-      alert("Por favor completa todos los campos (Nombre, Precio y URL de imagen)");
-      return;
-  }
+    if (!nombre || !precio || !urlImagen) {
+        alert("Por favor rellena todos los campos");
+        return;
+    }
 
-  try {
-      // Guardamos directamente en Firestore
-      await firebase.firestore().collection('productos').add({
-          nombre: nombre,
-          precio: precio,
-          imagen: urlImagen, // Guardamos el link directamente
-          existencia: true
-      });
+    try {
+        await db.collection('productos').add({
+            nombre: nombre,
+            precio: parseFloat(precio),
+            imagenUrl: urlImagen,
+            enStock: true
+        });
 
-      alert("¡Producto agregado con éxito!");
-      location.reload(); 
-  } catch (error) {
-      console.error("Error:", error);
-      alert("Error al guardar: " + error.message);
-  }
+        alert("¡Producto guardado exitosamente!");
+        location.reload(); // Esto limpia los campos
+    } catch (error) {
+        console.error("Error al guardar:", error);
+        alert("Error de Firebase: " + error.message);
+    }
 }
-
 
 // 2. Agregar o Editar un Producto (Create / Update)
 productForm.addEventListener('submit', async (e) => {
