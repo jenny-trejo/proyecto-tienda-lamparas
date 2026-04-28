@@ -3,6 +3,9 @@
 // firebase.initializeApp(firebaseConfig);
 // const db = firebase.firestore();
 // const storage = firebase.storage();
+// Inicializar Firestore
+const db = firebase.firestore(); 
+
 async function guardarProducto() {
   // 1. Obtenemos los valores de los cuadros de texto
   const nombre = document.getElementById('p-name').value;
