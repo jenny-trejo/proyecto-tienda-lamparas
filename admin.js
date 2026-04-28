@@ -4,42 +4,34 @@
 // const db = firebase.firestore();
 // const storage = firebase.storage();
 // Inicializar Firestore
+// 1. PRIMERO: Inicializar la base de datos (Fuera de cualquier función)
 const db = firebase.firestore(); 
 
+// 2. DESPUÉS: La función que usa esa base de datos
 async function guardarProducto() {
-  // 1. Obtenemos los valores de los cuadros de texto
-  const nombre = document.getElementById('p-name').value;
-  const precio = document.getElementById('p-price').value;
-  const urlImagen = document.getElementById('p-image').value;
+    const nombre = document.getElementById('p-name').value;
+    const precio = document.getElementById('p-price').value;
+    const urlImagen = document.getElementById('p-image').value;
 
-  // 2. Verificamos que no estén vacíos
-  if (!nombre || !precio || !urlImagen) {
-      alert("¡Faltan datos! Por favor llena el nombre, precio y la URL de la imagen.");
-      return;
-  }
+    if (!nombre || !precio || !urlImagen) {
+        alert("Por favor rellena todos los campos");
+        return;
+    }
 
-  try {
-      // 3. Intentamos guardar en la colección 'productos'
-      // Nota: Asegúrate de que 'db' esté definido arriba como: const db = firebase.firestore();
-      await db.collection('productos').add({
-          nombre: nombre,
-          precio: parseFloat(precio), // Convertimos el texto a número
-          imagenUrl: urlImagen,
-          enStock: true
-      });
+    try {
+        // Ahora 'db' ya existe y está lista
+        await db.collection('productos').add({
+            nombre: nombre,
+            precio: parseFloat(precio),
+            imagenUrl: urlImagen,
+            enStock: true
+        });
 
-      alert("✅ ¡Producto guardado con éxito!");
-      
-      // Limpiamos los campos para el siguiente producto
-      document.getElementById('p-name').value = "";
-      document.getElementById('p-price').value = "";
-      document.getElementById('p-image').value = "";
-
-  } catch (error) {
-      // 4. Si algo sale mal, esto nos dirá qué fue
-      console.error("Error completo de Firebase:", error);
-      alert("❌ No se pudo guardar: " + error.message);
-  }
+        alert("✅ ¡Producto guardado con éxito!");
+        location.reload(); 
+    } catch (error) {
+        alert("Error: " + error.message);
+    }
 }
 // 2. Agregar o Editar un Producto (Create / Update)
 productForm.addEventListener('submit', async (e) => {
