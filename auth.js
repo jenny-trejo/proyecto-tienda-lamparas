@@ -25,7 +25,7 @@ window.registrar = async () => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
     alert("Usuario registrado correctamente");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   } catch (error) {
     alert("Error: " + error.message);
   }
