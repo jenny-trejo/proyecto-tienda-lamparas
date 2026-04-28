@@ -3,33 +3,41 @@
 // firebase.initializeApp(firebaseConfig);
 // const db = firebase.firestore();
 // const storage = firebase.storage();
-  async function guardarProducto() {
-    // Verifica que estos IDs coincidan con tu HTML
-    const nombre = document.getElementById('p-name').value;
-    const precio = document.getElementById('p-price').value;
-    const urlImagen = document.getElementById('p-image').value;
+async function guardarProducto() {
+  // 1. Obtenemos los valores de los cuadros de texto
+  const nombre = document.getElementById('p-name').value;
+  const precio = document.getElementById('p-price').value;
+  const urlImagen = document.getElementById('p-image').value;
 
-    if (!nombre || !precio || !urlImagen) {
-        alert("Por favor rellena todos los campos");
-        return;
-    }
+  // 2. Verificamos que no estén vacíos
+  if (!nombre || !precio || !urlImagen) {
+      alert("¡Faltan datos! Por favor llena el nombre, precio y la URL de la imagen.");
+      return;
+  }
 
-    try {
-        await db.collection('productos').add({
-            nombre: nombre,
-            precio: parseFloat(precio),
-            imagenUrl: urlImagen,
-            enStock: true
-        });
+  try {
+      // 3. Intentamos guardar en la colección 'productos'
+      // Nota: Asegúrate de que 'db' esté definido arriba como: const db = firebase.firestore();
+      await db.collection('productos').add({
+          nombre: nombre,
+          precio: parseFloat(precio), // Convertimos el texto a número
+          imagenUrl: urlImagen,
+          enStock: true
+      });
 
-        alert("¡Producto guardado exitosamente!");
-        location.reload(); // Esto limpia los campos
-    } catch (error) {
-        console.error("Error al guardar:", error);
-        alert("Error de Firebase: " + error.message);
-    }
+      alert("✅ ¡Producto guardado con éxito!");
+      
+      // Limpiamos los campos para el siguiente producto
+      document.getElementById('p-name').value = "";
+      document.getElementById('p-price').value = "";
+      document.getElementById('p-image').value = "";
+
+  } catch (error) {
+      // 4. Si algo sale mal, esto nos dirá qué fue
+      console.error("Error completo de Firebase:", error);
+      alert("❌ No se pudo guardar: " + error.message);
+  }
 }
-
 // 2. Agregar o Editar un Producto (Create / Update)
 productForm.addEventListener('submit', async (e) => {
     e.preventDefault();
