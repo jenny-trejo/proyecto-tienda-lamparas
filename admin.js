@@ -3,36 +3,33 @@
 // firebase.initializeApp(firebaseConfig);
 // const db = firebase.firestore();
 // const storage = firebase.storage();
+async function guardarProducto() {
+  const nombre = document.getElementById('nombre').value;
+  const precio = document.getElementById('precio').value;
+  const urlImagen = document.getElementById('foto').value; // Ahora es texto
 
-const productForm = document.getElementById('product-form');
-const productList = document.getElementById('product-list');
-const submitBtn = document.getElementById('add-btn');
+  if (!nombre || !precio || !urlImagen) {
+      alert("Por favor completa todos los campos (Nombre, Precio y URL de imagen)");
+      return;
+  }
 
-let editingProductId = null; // Para saber si estamos editando
+  try {
+      // Guardamos directamente en Firestore
+      await firebase.firestore().collection('productos').add({
+          nombre: nombre,
+          precio: precio,
+          imagen: urlImagen, // Guardamos el link directamente
+          existencia: true
+      });
 
-// 1. Mostrar Productos en la Tabla (Read)
-function renderTable() {
-    productList.innerHTML = '';
-    db.collection('productos').orderBy('nombre').onSnapshot((querySnapshot) => {
-        productList.innerHTML = ''; // Limpiar para evitar duplicados
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${data.nombre}</td>
-                <td>$${data.precio}</td>
-                <td><img src="${data.imagenUrl}" alt="${data.nombre}" style="width: 50px; border-radius: 5px;"></td>
-                <td>${data.enStock ? 'Sí' : 'No'}</td>
-                <td>
-                    <button class="action-btn edit-btn" onclick="editProduct('${doc.id}')">Editar</button>
-                    <button class="action-btn stock-btn" onclick="toggleStock('${doc.id}', ${data.enStock})">Cambiar Stock</button>
-                    <button class="action-btn delete-btn" onclick="deleteProduct('${doc.id}')">Eliminar</button>
-                </td>
-            `;
-            productList.appendChild(row);
-        });
-    });
+      alert("¡Producto agregado con éxito!");
+      location.reload(); 
+  } catch (error) {
+      console.error("Error:", error);
+      alert("Error al guardar: " + error.message);
+  }
 }
+
 
 // 2. Agregar o Editar un Producto (Create / Update)
 productForm.addEventListener('submit', async (e) => {
